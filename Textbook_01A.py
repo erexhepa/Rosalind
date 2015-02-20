@@ -2,27 +2,34 @@
 '''
 A solution to a code challenges that accompanies Bioinformatics Algorithms: An Active-Learning Approach by Phillip Compeau & Pavel Pevzner.
 The textbook is hosted on Stepic and the problem is listed on ROSALIND under the Textbook track.
-
-Problem Title: Creating a Distance Matrix
+Problem Title: Pattern Matching Problem
 Chapter #: 01
-Problem ID: A 
-URL: http://rosalind.info/problems/1a/
+Problem ID: C
+URL: http://rosalind.info/problems/1c/
 '''
+def pattern_matching(pattern):
 
-with open('data/textbook/rosalind_1a.txt') as input_data:
-	dna, k = [line.strip() for line in input_data.readlines()]
-	k = int(k)
+    input_file = 'dataset_2_9.txt'
 
-kmer_dict = dict()
+    countPattern = 0
 
-for i in xrange(len(dna)-k+1):
-	if dna[i:i+k] in kmer_dict:
-		kmer_dict[dna[i:i+k]] += 1
-	else:
-		kmer_dict[dna[i:i+k]] = 1
+    with open(input_file) as input_data:
+        dna, k = [line.strip() for line in input_data.readlines()]
 
-kmers = [item[0] for item in kmer_dict.items() if item[1] == max(kmer_dict.values())]
+    k = int(k)
+    kmer_dict = dict()
 
-print ' '.join(kmers)
-with open('output/textbook/Textbook_01A.txt', 'w') as output_data:
-	output_data.write(' '.join(kmers))
+    for i in xrange(len(dna)-k+1):
+        if dna[i:i+k] in kmer_dict:
+            kmer_dict[dna[i:i+k]] += 1
+        else:
+            kmer_dict[dna[i:i+k]] = 1
+
+    kmers = [item[0] for item in kmer_dict.items() if item[1] == max(kmer_dict.values())]
+
+    countPattern = ' '.join(kmers)
+    print(countPattern)
+
+    return countPattern
+
+pattern_matching('test')
